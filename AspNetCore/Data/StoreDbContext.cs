@@ -18,4 +18,6 @@ public class StoreDbContext : DbContext
      * A partir dela, o EF Core pode mapear a entidade Produto para uma tabela chamada Produtos
      */
     public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
+    public DbSet<Pedido> Pedidos { get; set; }
 }

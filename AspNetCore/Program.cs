@@ -1,4 +1,6 @@
 using AspNetCore.Data;
+using AspNetCore.UseCase.Cliente;
+using AspNetCore.UseCase.Pedido;
 using AspNetCore.UseCase.Produto;
 using AspNetCore.Validators;
 using FluentValidation;
@@ -12,7 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<CriaClienteUseCase>();
 builder.Services.AddScoped<CriarProdutoUseCase>();
+builder.Services.AddScoped<CriaPedidoUseCase>();
+builder.Services.AddScoped<ListaPedidoUseCase>();
 
 var connectionString = builder.Configuration.GetConnectionString("StoreDb");
 
@@ -33,6 +39,8 @@ builder.Services.AddDbContext<StoreDbContext>(opt =>
 
 // Registra o validator no program.cs
 builder.Services.AddValidatorsFromAssemblyContaining<CriarProdutoValidador>();
+builder.Services.AddValidatorsFromAssemblyContaining<CriaClienteValidador>();
+builder.Services.AddValidatorsFromAssemblyContaining<CriaPedidoValidador>();
 
 var app = builder.Build();
 
