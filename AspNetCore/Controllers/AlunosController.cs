@@ -1,5 +1,3 @@
-using AspNetCore.Entities;
-using AspNetCore.Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCore.Controllers;
@@ -70,7 +68,7 @@ public class AlunosController : ControllerBase // fornece funcionalidade úteis 
      * do método.
      */
     [HttpPost]
-    public IActionResult Cadastrar([FromBody] RequisicaoAlunoDTO dto)
+    public IActionResult Cadastrar()
     {
         /*
          * O DTO permite quais informações serão recebidas ou
@@ -79,12 +77,7 @@ public class AlunosController : ControllerBase // fornece funcionalidade úteis 
          * ser transportadas. Em resumo podemos usar o DTO e expor
          * apenas os dados necessários.
          */
-        var resposta = new RespostaAlunoDTO
-        {
-            Nome = dto.Nome,
-            Sobrenome = dto.Sobrenome,
-        };
 
-        return Ok(resposta);
+        return Ok();
     }
 }
