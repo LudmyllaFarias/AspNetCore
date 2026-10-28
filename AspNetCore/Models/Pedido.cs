@@ -8,5 +8,5 @@ public class Pedido
     public decimal ValorTotal { get; set; }
 
     // propriedade de navegação
-    public Cliente Cliente { get; set; } = null!;
+    public Cliente? Cliente { get; set; }
 }

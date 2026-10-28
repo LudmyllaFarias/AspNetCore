@@ -1,4 +1,6 @@
 ﻿using AspNetCore.Data;
+using AspNetCore.DTOs.Pedido;
+using AspNetCore.DTOs.Cliente;
 using AspNetCore.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,11 +15,26 @@ public class ListaPedidoUseCase
         _dbContext = dbContext;
     }
 
-    public List<AspNetCore.Models.Pedido> Executar()
+    public List<PedidoResponse> Executar()
     {
+        /*
+         * O include determina que os dados de uma entidade
+         * relacionada também sejam carregados naquela consulta
+         */
+
         var pedido = _dbContext.Pedidos
-            .Include(x => x.Cliente)
-            .ToList();
+            .Select(p => new PedidoResponse
+            {
+                Id = p.Id,
+                DataPedido = p.DataPedido,
+                ValorTotal = p.ValorTotal,
+
+                Cliente = new ClientePedidoResponse
+                {
+                    Nome = p.Cliente.Nome
+                }
+            }).ToList();
+      
         return pedido;
     }
 }
